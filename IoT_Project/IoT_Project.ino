@@ -23,7 +23,7 @@ void setup() {
   Wire.setSCL(12);
   Wire.begin();
 
-  Serial.begin(115200);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -45,6 +45,15 @@ void loop() {
   }
   delay(2000);
 
+  Serial.print("Humidity: ");
+  Serial.print(hum);
+  Serial.print("Temperature: ");
+  Serial.print(temp);
+  Serial.print("C");
+  Serial.print("Rain Sensor Value: ");
+  Serial.print(rain_sensor);
+  Serial.println(" ");
+  
   if(hum < 50 && temp > 20)
   {
     display.clearDisplay();
