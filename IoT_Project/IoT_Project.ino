@@ -6,6 +6,7 @@
 
 #define DHTPIN 2
 #define DHTTYPE DHT11
+#define BUZZER 6
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 65 // OLED display height, in pixels
 
@@ -18,6 +19,7 @@ void setup() {
 
   dht.begin();
   pinMode(27, INPUT);
+  pinMode(BUZZER, OUTPUT);
 
   Wire.setSDA(13);
   Wire.setSCL(12);
@@ -53,7 +55,7 @@ void loop() {
   Serial.print("Rain Sensor Value: ");
   Serial.print(rain_sensor);
   Serial.println(" ");
-  
+
   if(hum < 50 && temp > 20)
   {
     display.clearDisplay();
@@ -90,6 +92,11 @@ void loop() {
 
   if(rain_sensor < 900) 
   {
+    tone(BUZZER, 500);
+    delay(500);
+    noTone(BUZZER);
+    delay(500);
+    
     display.clearDisplay();
     display.setTextSize(1);
     display.setTextColor(WHITE);
